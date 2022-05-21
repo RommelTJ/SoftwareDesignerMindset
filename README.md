@@ -1,0 +1,2 @@
+# SoftwareDesignerMindset
+Course Notes
