@@ -63,6 +63,11 @@ def main():
     print(my_month)  # Month.APRIL
     print(my_year)  # 1988
 
+    x1: int = 5
+    x2: float = 2.22
+    x3 = x1 + x2
+    print(x3)
+
 
 if __name__ == "__main__":
     main()
