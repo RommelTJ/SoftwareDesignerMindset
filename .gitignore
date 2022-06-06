@@ -25,3 +25,5 @@ bin-release/
 **/*.pem
 
 .DS_Store
+
+*.pyc
