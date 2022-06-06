@@ -1,5 +1,5 @@
+from dataclasses import dataclass, field
 from enum import Enum, auto
-
 from typing import List
 
 
@@ -9,24 +9,28 @@ class PaymentStatus(Enum):
     PAID = auto()
 
 
-class Order:
-    def __init__(self):
-        self.items: List[str] = []
-        self.quantities: List[int] = []
-        self.prices: List[int] = []
-        self.status: str = "open"
-
-    def add_item(self, name: str, quantity: int, price: int) -> None:
-        self.items.append(name)
-        self.quantities.append(quantity)
-        self.prices.append(price)
+@dataclass
+class LineItem:
+    item: str
+    quantity: int
+    price: int
 
     @property
     def total_price(self) -> int:
-        total = 0
-        for i in range(len(self.prices)):
-            total += self.quantities[i] * self.prices[i]
-        return total
+        return self.quantity * self.price
+
+
+@dataclass
+class Order:
+    items: List[LineItem] = field(default_factory=list)
+    status: PaymentStatus = PaymentStatus.OPEN
+
+    def add_item(self, name: str, quantity: int, price: int) -> None:
+        self.items.append(LineItem(name, quantity, price))
+
+    @property
+    def total_price(self) -> int:
+        return sum(item.total_price for item in self.items)
 
 
 def main() -> None:
