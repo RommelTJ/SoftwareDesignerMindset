@@ -1,7 +1,5 @@
 # Types and Type Hints
 
-* You can add type hints to function in python, but the compiler won't stop you. They are ignored by the interpreter.
-  * These are also ignored by the interpreter.
 * Python functions are Callable. Also ignored by the interpreter.
 * Without types and type hints, you don't know what is being called except by reading docs or implementation.
 * Use types to clarify what you want.
