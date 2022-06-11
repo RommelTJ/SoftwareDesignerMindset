@@ -1,8 +1,5 @@
 # Types and Type Hints
 
-* Without types and type hints, you don't know what is being called except by reading docs or implementation.
-* Use types to clarify what you want.
-* Python is strongly and dynamically typed.
 * Structural vs Nominal typing
   * Nominal: If you inherit from a type, you are of that type.
   * Structural: If you have the same shape as a type, you are of that type.
