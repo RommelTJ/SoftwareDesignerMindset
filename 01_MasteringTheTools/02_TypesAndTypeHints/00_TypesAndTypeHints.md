@@ -1,11 +1,5 @@
 # Types and Type Hints
 
-* Structural vs Nominal typing
-  * Nominal: If you inherit from a type, you are of that type.
-  * Structural: If you have the same shape as a type, you are of that type.
-* You can call len on any object that has a __len__ method. This is a simple example of duck-typing.
-  * If it has a __len__ function, you can get its length.
-  * If an object adheres to this protocol, then it is of that type.
 * Pros
   * Good for working with a team
   * Good for catching errors early
