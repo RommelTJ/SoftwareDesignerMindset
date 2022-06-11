@@ -1,6 +1,5 @@
 # Types and Type Hints
 
-* Python functions are Callable. Also ignored by the interpreter.
 * Without types and type hints, you don't know what is being called except by reading docs or implementation.
 * Use types to clarify what you want.
 * Python is strongly and dynamically typed.
