@@ -46,6 +46,7 @@ class Vehicle:
     # accessories: List[Accessory] = field(default_factory=lambda: [Accessory.AIRCO, Accessory.NAVIGATION])
     fuel_type: FuelType = FuelType.ELECTRIC
 
+    # You can do this instead if you want to have post-init object initialization.
     # def __post_init__(self):
     #     self.license_plate = generate_vehicle_license()
     #     if self.brand == "Tesla":
