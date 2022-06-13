@@ -1,7 +1,5 @@
 # Data Structures
 
-* Enums avoid mistakes.
-  * Good for representing a limited set of options.
 * Tuples.
   * For when you are grouping sets of values.
   * If you need more than 2 values, probably use a class.
