@@ -1,9 +1,11 @@
 import math
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
 
 
-class Vehicle:
+class Vehicle(ABC):
+    @abstractmethod
     def reserve(self, start_date: datetime, days: int) -> None:
         """A vehicle can be reserved for renting"""
 
@@ -38,6 +40,7 @@ def reserve_now(vehicle: Vehicle):
 def main():
     car = Car("Ford")
     truck = Truck("DAF")
+    # what = Vehicle() # Can't instantiate abstract class Vehicle with abstract methods reserve
     reserve_now(car)
     reserve_now(truck)
 
