@@ -4,11 +4,13 @@ from datetime import datetime
 from typing import Protocol
 
 
-class Vehicle(Protocol):
+class Rentable(Protocol):
     def reserve(self, start_date: datetime, days: int) -> None:
         """A vehicle can be reserved for renting"""
         ...
 
+
+class LicenseHolder(Protocol):
     def renew_license(self, new_license_date: datetime):
         ...
 
@@ -39,12 +41,12 @@ class Truck:
         print(f"Renewing the license from {new_license_date}")
 
 
-def reserve_now(vehicle: Vehicle):
-    vehicle.reserve(datetime.now(), 40)
+def reserve_now(rentable: Rentable):
+    rentable.reserve(datetime.now(), 40)
 
 
-def renew_license_now(vehicle: Vehicle):
-    vehicle.renew_license(datetime.now())
+def renew_license_now(license_holder: LicenseHolder):
+    license_holder.renew_license(datetime.now())
 
 
 def main():
