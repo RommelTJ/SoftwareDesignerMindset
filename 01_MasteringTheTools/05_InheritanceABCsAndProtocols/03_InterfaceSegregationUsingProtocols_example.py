@@ -9,6 +9,9 @@ class Vehicle(Protocol):
         """A vehicle can be reserved for renting"""
         ...
 
+    def renew_license(self, new_license_date: datetime):
+        ...
+
 
 @dataclass
 class Car:
@@ -32,9 +35,16 @@ class Truck:
         self.reserved_trailer = True
         print(f"Reserving truck {self.model} for {months} months at date {start_date} with trailer.")
 
+    def renew_license(self, new_license_date: datetime):
+        print(f"Renewing the license from {new_license_date}")
+
 
 def reserve_now(vehicle: Vehicle):
     vehicle.reserve(datetime.now(), 40)
+
+
+def renew_license_now(vehicle: Vehicle):
+    vehicle.renew_license(datetime.now())
 
 
 def main():
@@ -42,6 +52,8 @@ def main():
     truck = Truck("DAF")
     reserve_now(car)
     reserve_now(truck)
+    renew_license_now(truck)
+    # renew_license_now(car) # AttributeError: 'Car' object has no attribute 'renew_license'
 
 
 if __name__ == "__main__":
