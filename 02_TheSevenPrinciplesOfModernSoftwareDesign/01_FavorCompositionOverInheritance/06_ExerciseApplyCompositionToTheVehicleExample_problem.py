@@ -1,5 +1,39 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
+from typing import Protocol, List
+
+
+class Pricing(Protocol):
+
+    def get_total_price(self) -> int:
+        ...
+
+
+@dataclass()
+class PricePerDay:
+    price_per_day: int
+    num_of_days: int
+
+    def get_total_price(self):
+        return self.price_per_day * self.num_of_days
+
+
+@dataclass()
+class PricePerKm:
+    price_per_km: int
+    num_of_kms: int
+
+    def get_total_price(self):
+        return self.price_per_km * self.num_of_kms
+
+
+@dataclass()
+class PricePerKm:
+    price_per_month: int
+    num_of_months: int
+
+    def get_total_price(self):
+        return self.price_per_month * self.num_of_months
 
 
 class FuelType(Enum):
@@ -22,34 +56,18 @@ class Vehicle:
     fuel_type: FuelType
     license_plate: str
     reserved: bool
+    pricing: List[Pricing] = field(default_factory=list)
 
 
 @dataclass()
-class VehiclePerDay(Vehicle):
-    price_per_km: int
-    price_per_day: int
-
-
-@dataclass()
-class VehiclePerMonth(Vehicle):
-    price_per_month: int
-
-
-@dataclass()
-class CarPerDay(VehiclePerDay):
-    number_of_seats: int
-    storage_capacity_litres: int
-
-
-@dataclass()
-class CarPerMonth(VehiclePerMonth):
-    number_of_seats: int
-    storage_capacity_litres: int
+class Car(Vehicle):
+    number_of_seats: int = 5
+    storage_capacity_litres: int = 200
 
 
 @dataclass()
 class Truck(Vehicle):
-    cab_style: TruckCabStyle
+    cab_style: TruckCabStyle = TruckCabStyle.REGULAR
 
 
 @dataclass()
@@ -57,8 +75,8 @@ class Trailer:
     brand: str
     model: str
     capacity_m3: int
-    price_per_month: int
     reserved: bool
+    pricing: List[Pricing] = field(default_factory=list)
 
 
 def main():
