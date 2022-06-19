@@ -20,11 +20,12 @@ class Order:
         self.quantities.append(quantity)
         self.prices.append(price)
 
-    def set_status(self, status: PaymentStatus):
+    def set_status(self, status: PaymentStatus) -> None:
         self.status = status
 
 
 class PaymentProcessor:
+
     def pay_debit(self, order: Order, security_code: str) -> None:
         print("Processing debit payment type")
         print(f"Verifying security code: {security_code}")
