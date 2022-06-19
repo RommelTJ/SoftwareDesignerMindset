@@ -4,34 +4,35 @@ from typing import Protocol, List
 
 
 class Pricing(Protocol):
+
     def get_total_price(self) -> int:
         ...
 
 
-@dataclass
+@dataclass()
 class PricePerDay:
     price_per_day: int
     num_of_days: int
 
-    def get_total_price(self) -> int:
+    def get_total_price(self):
         return self.price_per_day * self.num_of_days
 
 
-@dataclass
+@dataclass()
 class PricePerKm:
     price_per_km: int
     num_of_kms: int
 
-    def get_total_price(self) -> int:
+    def get_total_price(self):
         return self.price_per_km * self.num_of_kms
 
 
-@dataclass
-class PricePerMonth:
+@dataclass()
+class PricePerKm:
     price_per_month: int
     num_of_months: int
 
-    def get_total_price(self) -> int:
+    def get_total_price(self):
         return self.price_per_month * self.num_of_months
 
 
@@ -58,18 +59,18 @@ class Vehicle:
     pricing: List[Pricing] = field(default_factory=list)
 
 
-@dataclass
+@dataclass()
 class Car(Vehicle):
     number_of_seats: int = 5
     storage_capacity_litres: int = 200
 
 
-@dataclass
+@dataclass()
 class Truck(Vehicle):
     cab_style: TruckCabStyle = TruckCabStyle.REGULAR
 
 
-@dataclass
+@dataclass()
 class Trailer:
     brand: str
     model: str
