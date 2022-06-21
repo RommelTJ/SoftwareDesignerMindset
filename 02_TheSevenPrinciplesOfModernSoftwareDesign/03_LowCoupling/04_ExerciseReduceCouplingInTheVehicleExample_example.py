@@ -1,12 +1,10 @@
 from dataclasses import dataclass
-
 from typing import List
 
 
 @dataclass
 class VehicleData:
     """A class to hold vehicle data."""
-
     brand: str
     price_per_day: int
     price_per_km: int
@@ -64,11 +62,8 @@ def read_kms_to_drive() -> int:
 
 
 def main():
-
     vehicle_type = read_vehicle_type(list(VEHICLE_DATA.keys()))
-
     days = read_rent_days()
-
     km = read_kms_to_drive()
 
     # retrieve the vehicle data from the dictionary
