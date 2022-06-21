@@ -1,10 +1,5 @@
 # Low Coupling
 
-* A measure of how much your classes need each other.
-* The lower the coupling, the more reusable it is.
-* Software design often has low coupling as a goal.
-* Low coupling makes refactorings easy.
-* You can't completely eliminate coupling. But you can be intentional about it.
 * Content coupling
   * When one method/function/class modifies directly the data of another class.
 * Global coupling
