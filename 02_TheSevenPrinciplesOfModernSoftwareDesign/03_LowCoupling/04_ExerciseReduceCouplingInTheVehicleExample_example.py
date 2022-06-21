@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
@@ -7,6 +8,12 @@ class VehicleData:
     brand: str
     price_per_day: int
     price_per_km: int
+    km_free_limit: int = 100
+
+    def compute_rental_cost(self, days: int, km: int) -> int:
+        """Computes the rental cost for a vehicle."""
+        paid_kms = max(km - self.km_free_limit, 0)
+        return self.price_per_km * paid_kms + self.price_per_day * days
 
 
 VEHICLE_DATA = {
@@ -16,12 +23,12 @@ VEHICLE_DATA = {
 }
 
 
-def read_vehicle_type() -> str:
+def read_vehicle_type(vehicle_types: List[str]) -> str:
     """Reads the vehicle type from the user."""
     vehicle_type = ""
-    while vehicle_type not in VEHICLE_DATA:
+    while vehicle_type not in vehicle_types:
         vehicle_type = input(
-            f"What type of vehicle would you like to rent ({', '.join(VEHICLE_DATA)})? "
+            f"What type of vehicle would you like to rent ({', '.join(vehicle_types)})? "
         )
     return vehicle_type
 
@@ -54,22 +61,16 @@ def read_kms_to_drive() -> int:
     return km
 
 
-def compute_rental_cost(vehicle_type: str, days: int, km: int) -> int:
-    """Computes the rental cost for a vehicle."""
-    vehicle_data = VEHICLE_DATA[vehicle_type]
-    price_per_km = vehicle_data.price_per_km
-    price_per_day = vehicle_data.price_per_day
-    paid_kms = max(km - 100, 0)
-    return price_per_km * paid_kms + price_per_day * days
-
-
 def main():
-    vehicle_type = read_vehicle_type()
+    vehicle_type = read_vehicle_type(list(VEHICLE_DATA.keys()))
     days = read_rent_days()
     km = read_kms_to_drive()
 
+    # retrieve the vehicle data from the dictionary
+    vehicle_data = VEHICLE_DATA[vehicle_type]
+
     # compute the final rental price
-    rental_price = compute_rental_cost(vehicle_type, days, km)
+    rental_price = vehicle_data.compute_rental_cost(days, km)
 
     # print the result
     print(f"The total price of the rental is ${(rental_price / 100):.2f}")
