@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum, auto
-
-reader = __import__("05_StartWithTheData_reader")
+from reader import read_kms_to_drive, read_rent_days, read_vehicle_type
 
 
 FREE_KMS = 100
@@ -26,6 +25,14 @@ class Vehicle:
     reserved: bool
 
 
+class ContractStatus(Enum):
+    ORDERED = auto()
+    PAID = auto()
+    PICKED_UP = auto()
+    DROPPED_OFF = auto()
+    CANCELLED = auto()
+
+
 @dataclass
 class Customer:
     id: int
@@ -34,14 +41,6 @@ class Customer:
     postal_code: str
     city: str
     email: str
-
-
-class ContractStatus(Enum):
-    ORDERED = auto()
-    PAID = auto()
-    PICKED_UP = auto()
-    DROPPED_OFF = auto()
-    CANCELLED = auto()
 
 
 @dataclass
@@ -66,12 +65,12 @@ VEHICLES = {
 
 
 def main():
-    customer = Customer(12345, "Arjan", "Sesame street 104", "1234", "Amsterdam", "hi@arjancodes.com")
-    vehicle_type = reader.read_vehicle_type(list(VEHICLES.keys()))
-    days = reader.read_rent_days()
-    additional_km = reader.read_kms_to_drive()
+    vehicle_type = read_vehicle_type(list(VEHICLES.keys()))
+    days = read_rent_days()
+    additional_km = read_kms_to_drive()
 
     # setup the rental contract
+    customer = Customer(12345, "Rommel", "123 Street", "90210", "Beverly Hills", "me@email.com")
     rental = RentalContract(
         VEHICLES[vehicle_type],
         customer,
