@@ -1,16 +1,15 @@
-from pos.authorization import authorize_google, authorize_sms, authorize_robot
+from typing import Callable
+
 from pos.data import PaymentStatus
 from pos.order import Order
 
 
+AuthorizeFunction = Callable[[], bool]
+
+
 class PaymentProcessor:
-    def __init__(self, authorizer_type: str):
-        if authorizer_type == "google":
-            self.authorize = authorize_google
-        elif authorizer_type == "sms":
-            self.authorize = authorize_sms
-        else:
-            self.authorize = authorize_robot
+    def __init__(self, authorize: AuthorizeFunction):
+        self.authorize = authorize
 
     def pay_debit(self, order: Order) -> None:
         if not self.authorize():
