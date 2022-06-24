@@ -26,3 +26,6 @@ class Order:
     @property
     def total_price(self) -> int:
         return sum(item.total_price for item in self.items)
+
+    def set_status(self, status: PaymentStatus) -> None:
+        self.status = status
