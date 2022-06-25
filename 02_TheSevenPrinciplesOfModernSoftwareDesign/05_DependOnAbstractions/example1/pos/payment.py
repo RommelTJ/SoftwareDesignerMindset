@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Callable, Protocol
 
 from pos.data import PaymentStatus
@@ -14,19 +15,38 @@ class Payable(Protocol):
         ...
 
 
-class PaymentProcessor:
-    def __init__(self, authorize: AuthorizeFunction):
-        self.authorize = authorize
+class PaymentProcessor(Protocol):
+    def pay(self, payable: Payable, authorize: AuthorizeFunction):
+        ...
 
-    def pay_debit(self, payable: Payable) -> None:
-        if not self.authorize():
+
+class DebitPaymentProcessor:
+    def pay(self, payable: Payable, authorize: AuthorizeFunction):
+        if not authorize():
             raise Exception("Not authorized")
         print(f"Processing debit payment for amount: ${(payable.total_price / 100):.2f}.")
         payable.set_status(PaymentStatus.PAID)
 
-    def pay_credit(self, payable: Payable, security_code: str) -> None:
-        if not self.authorize():
+
+@dataclass
+class CreditPaymentProcessor:
+    security_code: str
+
+    def pay(self, payable: Payable, authorize: AuthorizeFunction):
+        if not authorize():
             raise Exception("Not authorized")
         print(f"Processing credit payment for amount: ${(payable.total_price / 100):.2f}.")
-        print(f"Verifying security code: {security_code}")
+        print(f"Verifying security code: {self.security_code}")
+        payable.set_status(PaymentStatus.PAID)
+
+
+@dataclass
+class PaypalPaymentProcessor:
+    email_address: str
+
+    def pay(self, payable: Payable, authorize: AuthorizeFunction):
+        if not authorize():
+            raise Exception("Not authorized")
+        print(f"Processing Paypal payment for amount: ${(payable.total_price / 100):.2f}.")
+        print(f"Using email address: {self.email_address}")
         payable.set_status(PaymentStatus.PAID)
