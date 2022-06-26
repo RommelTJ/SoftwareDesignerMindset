@@ -3,7 +3,7 @@ Basic video exporting example
 """
 
 from pathlib import Path
-from typing import Protocol, List
+from typing import Protocol, List, Dict, Tuple
 
 
 def read_choice(question: str, choices: List[str]) -> str:
@@ -109,25 +109,25 @@ class MasterQualityExporter:
         return WAVAudioExporter()
 
 
-def main() -> None:
+FACTORIES: Dict[str, ExporterFactory] = {
+    "low": LowQualityExporter(),
+    "high": HighQualityExporter(),
+    "master": MasterQualityExporter()
+}
+
+
+def create_exporters() -> Tuple[VideoExporter, AudioExporter]:
     # read the desired export quality
     export_quality = read_choice(
         "What output quality do you want", ["low", "high", "master"]
     )
 
-    # create the video and audio exporters
-    video_exporter: VideoExporter
-    audio_exporter: AudioExporter
-    if export_quality == "low":
-        video_exporter = H264BPVideoExporter()
-        audio_exporter = AACAudioExporter()
-    elif export_quality == "high":
-        video_exporter = H264Hi422PVideoExporter()
-        audio_exporter = AACAudioExporter()
-    else:
-        # default: master quality
-        video_exporter = LosslessVideoExporter()
-        audio_exporter = WAVAudioExporter()
+    factory = FACTORIES[export_quality]
+    return factory.create_video_exporter(), factory.create_audio_exporter()
+
+
+def main() -> None:
+    (video_exporter, audio_exporter) = create_exporters()
 
     # prepare the export
     video_exporter.prepare_export("placeholder_for_video_data")
