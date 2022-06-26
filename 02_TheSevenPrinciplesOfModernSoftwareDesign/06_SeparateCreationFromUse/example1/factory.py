@@ -77,6 +77,38 @@ class AACAudioExporter:
         print(f"Exporting audio data in AAC format to {folder}.")
 
 
+class ExporterFactory(Protocol):
+    def create_video_exporter(self) -> VideoExporter:
+        ...
+
+    def create_audio_exporter(self) -> AudioExporter:
+        ...
+
+
+class LowQualityExporter:
+    def create_video_exporter(self) -> VideoExporter:
+        return H264BPVideoExporter()
+
+    def create_audio_exporter(self) -> AudioExporter:
+        return AACAudioExporter()
+
+
+class HighQualityExporter:
+    def create_video_exporter(self) -> VideoExporter:
+        return H264Hi422PVideoExporter()
+
+    def create_audio_exporter(self) -> AudioExporter:
+        return AACAudioExporter()
+
+
+class MasterQualityExporter:
+    def create_video_exporter(self) -> VideoExporter:
+        return LosslessVideoExporter()
+
+    def create_audio_exporter(self) -> AudioExporter:
+        return WAVAudioExporter()
+
+
 def main() -> None:
     # read the desired export quality
     export_quality = read_choice(
