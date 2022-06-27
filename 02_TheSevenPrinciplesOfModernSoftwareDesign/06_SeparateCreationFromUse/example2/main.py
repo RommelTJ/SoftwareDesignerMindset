@@ -1,13 +1,39 @@
-from typing import List, Dict
+from typing import List, Dict, Callable
 
-from pos.order import LineItem, Order
-from pos.payment import CreditPaymentProcessor, PaypalPaymentProcessor, DebitPaymentProcessor, AuthorizeFunction
 from pos.authorization import authorize_sms, authorize_google
-
+from pos.order import LineItem, Order
+from pos.payment import (
+    CreditPaymentProcessor,
+    PaypalPaymentProcessor,
+    DebitPaymentProcessor,
+    AuthorizeFunction,
+    PaymentProcessor
+)
 
 AUTHORIZERS: Dict[str, AuthorizeFunction] = {
     "google": authorize_google,
     "sms": authorize_sms
+}
+
+
+def create_paypal_payment_processor() -> PaymentProcessor:
+    email_address = input("Enter your email address: ")
+    return PaypalPaymentProcessor(email_address)
+
+
+def create_debit_payment_processor() -> PaymentProcessor:
+    return DebitPaymentProcessor()
+
+
+def create_credit_payment_processor() -> PaymentProcessor:
+    security_code = input("Enter the security code: ")
+    return CreditPaymentProcessor(security_code)
+
+
+PROCESSORS: Dict[str, Callable[[], PaymentProcessor]] = {
+    "paypal": create_paypal_payment_processor,
+    "debit": create_debit_payment_processor,
+    "credit": create_credit_payment_processor
 }
 
 
@@ -24,6 +50,11 @@ def read_authorizer() -> AuthorizeFunction:
     return AUTHORIZERS[auth_choice]
 
 
+def read_payment_processor() -> PaymentProcessor:
+    payment_processor_choice = read_choice("How would you like to pay?", ["paypal", "credit", "debit"])
+    return PROCESSORS[payment_processor_choice]()
+
+
 def main():
     order = Order()
     order.add_item(LineItem("Keyboard", 1, 5000))
@@ -32,18 +63,7 @@ def main():
 
     print(f"The total price is: ${(order.total_price / 100):.2f}.")
 
-    # select the payment method
-    payment_processor_choice = read_choice("How would you like to pay?", ["paypal", "credit", "debit"])
-
-    if payment_processor_choice == "paypal":
-        email_address = input("Enter your email address: ")
-        processor = PaypalPaymentProcessor(email_address)
-    elif payment_processor_choice == "credit":
-        security_code = input("Enter the security code: ")
-        processor = CreditPaymentProcessor(security_code)
-    else:
-        processor = DebitPaymentProcessor()
-
+    processor = read_payment_processor()
     authorizer = read_authorizer()
     processor.pay(order, authorizer)
 
