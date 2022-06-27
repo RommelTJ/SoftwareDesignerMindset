@@ -18,6 +18,12 @@ def read_choice(question: str, choices: List[str]) -> str:
     return choice
 
 
+def read_authorizer() -> AuthorizeFunction:
+    # select the authentication method
+    auth_choice = read_choice("Choose your authentication method", list(AUTHORIZERS.keys()))
+    return AUTHORIZERS[auth_choice]
+
+
 def main():
     order = Order()
     order.add_item(LineItem("Keyboard", 1, 5000))
@@ -29,9 +35,6 @@ def main():
     # select the payment method
     payment_processor_choice = read_choice("How would you like to pay?", ["paypal", "credit", "debit"])
 
-    # select the authentication method
-    auth_choice = read_choice("Choose your authentication method", ["google", "sms"])
-
     if payment_processor_choice == "paypal":
         email_address = input("Enter your email address: ")
         processor = PaypalPaymentProcessor(email_address)
@@ -41,12 +44,8 @@ def main():
     else:
         processor = DebitPaymentProcessor()
 
-    if auth_choice == "google":
-        auth = authorize_google
-    else:
-        auth = authorize_sms
-
-    processor.pay(order, auth)
+    authorizer = read_authorizer()
+    processor.pay(order, authorizer)
 
 
 if __name__ == "__main__":
