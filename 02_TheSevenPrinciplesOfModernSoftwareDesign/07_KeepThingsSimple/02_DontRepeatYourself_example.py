@@ -8,6 +8,17 @@ def read_choice(question: str, choices: List[str]) -> str:
     return choice
 
 
+def read_int(question: str) -> int:
+    value = 0
+    while value < 1:
+        value_str = input(f"{question} ")
+        try:
+            value = int(value_str)
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+    return value
+
+
 def read_vehicle_type():
     vehicle_types = ["vw", "bmw", "tesla"]
     return read_choice("What type of vehicle would you like to rent", vehicle_types)
@@ -20,26 +31,12 @@ def read_vehicle_color():
 
 def read_rent_days():
     """Reads the number of days from the user."""
-    days = 0
-    while days < 1:
-        days_str = input(f"How many days would you like to rent the vehicle? ")
-        try:
-            days = int(days_str)
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-    return days
+    return read_int("How many days would you like to rent the vehicle?")
 
 
 def read_kms_to_drive():
     """Reads the number of kms to drive from the user."""
-    kms = 0
-    while kms < 1:
-        km_str = input(f"How many kms would you like to drive? ")
-        try:
-            kms = int(km_str)
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-    return kms
+    return read_int("How many kms would you like to drive?")
 
 
 def main() -> None:
