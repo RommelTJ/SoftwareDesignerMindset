@@ -30,12 +30,10 @@ def read_vehicle_color():
 
 
 def read_rent_days():
-    """Reads the number of days from the user."""
     return read_int("How many days would you like to rent the vehicle?")
 
 
 def read_kms_to_drive():
-    """Reads the number of kms to drive from the user."""
     return read_int("How many kms would you like to drive?")
 
 
