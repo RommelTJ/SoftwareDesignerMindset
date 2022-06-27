@@ -4,3 +4,4 @@
 * See code example.
 * You also have to make sure you're not complicating things for yourself.
   * More generic is not always better. Don't apply concepts without thinking.
+  * AHA = Avoid Hasty Abstractions.
