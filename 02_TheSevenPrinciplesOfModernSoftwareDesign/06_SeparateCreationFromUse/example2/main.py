@@ -1,8 +1,14 @@
-from typing import List
+from typing import List, Dict
 
 from pos.order import LineItem, Order
-from pos.payment import CreditPaymentProcessor, PaypalPaymentProcessor, DebitPaymentProcessor
+from pos.payment import CreditPaymentProcessor, PaypalPaymentProcessor, DebitPaymentProcessor, AuthorizeFunction
 from pos.authorization import authorize_sms, authorize_google
+
+
+AUTHORIZERS: Dict[str, AuthorizeFunction] = {
+    "google": authorize_google,
+    "sms": authorize_sms
+}
 
 
 def read_choice(question: str, choices: List[str]) -> str:
