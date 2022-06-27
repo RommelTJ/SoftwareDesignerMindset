@@ -1,17 +1,21 @@
+from typing import List
+
+
+def read_choice(question: str, choices: List[str]) -> str:
+    choice = ""
+    while choice not in choices:
+        choice = input(f"{question} ({', '.join(choices)})? ")
+    return choice
+
+
 def read_vehicle_type():
     vehicle_types = ["vw", "bmw", "tesla"]
-    vehicle_type = ""
-    while vehicle_type not in vehicle_types:
-        vehicle_type = input(f"What type of vehicle would you like to rent ({', '.join(vehicle_types)})? ")
-    return vehicle_type
+    return read_choice("What type of vehicle would you like to rent", vehicle_types)
 
 
 def read_vehicle_color():
     vehicle_colors = ["black", "red", "blue"]
-    vehicle_color = ""
-    while vehicle_color not in vehicle_colors:
-        vehicle_color = input(f"What color vehicle would you like to rent ({', '.join(vehicle_colors)})? ")
-    return vehicle_color
+    return read_choice("What color vehicle would you like to rent", vehicle_colors)
 
 
 def read_rent_days():
