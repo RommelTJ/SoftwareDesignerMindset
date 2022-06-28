@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import Protocol, List
+from typing import List
 
 
 class PaymentStatus(Enum):
@@ -20,69 +20,30 @@ class LineItem:
         return self.quantity * self.price
 
 
-class Discount(Protocol):
-    def compute_discount(self, price: int) -> int:
-        """Computes the discount, given a price."""
-        ...
-
-
-@dataclass()
-class FixedDiscount:
-    discount: int = 0
-
-    def compute_discount(self, price: int) -> int:
-        return self.discount
-
-
-@dataclass()
-class VariableDiscount:
-    discount_percentage: float = 0
-
-    def compute_discount(self, price: int) -> int:
-        return int(self.discount_percentage * price)
-
-
 class Order:
     def __init__(self):
         self.items: List[LineItem] = []
         self.status: PaymentStatus = PaymentStatus.OPEN
-        self.discounts: List[Discount] = []
+        self.fixed_discount: int = 0
+        self.variable_discount: float = 0.0
 
-    def add_item(self, name: str, quantity: int, price: int) -> None:
-        self.items.append(LineItem(name, quantity, price))
-
-    def add_discount(self, discount: Discount) -> None:
-        self.discounts.append(discount)
+    def add_item(self, item: LineItem) -> None:
+        self.items.append(item)
 
     @property
     def total_price(self) -> int:
-        total = 0
-        for item in self.items:
-            total += item.total_price
-        total_discount = 0
-        for discount in self.discounts:
-            total_discount += discount.compute_discount(total)
-        return total - total_discount
-
-
-def create_order(items: List[LineItem], discounts: List[Discount]):
-    order = Order()
-    for item in items:
-        order.add_item(item.name, item.quantity, item.price)
-    for discount in discounts:
-        order.add_discount(discount)
-    return order
+        sub_total = sum(item.total_price for item in self.items)
+        discount = int(self.fixed_discount + self.variable_discount * sub_total)
+        return sub_total - discount
 
 
 def main() -> None:
-    order = create_order(
-        [
-            LineItem("Keyboard", 1, 5000),
-            LineItem("SSD", 1, 15000),
-            LineItem("USB Cable", 2, 500),
-        ],
-        [VariableDiscount(0.1), FixedDiscount(1000), VariableDiscount(0.05)]
-    )
+    order = Order()
+    order.add_item(LineItem("Keyboard", 1, 5000))
+    order.add_item(LineItem("SSD", 1, 15000))
+    order.add_item(LineItem("USB Cable", 2, 500))
+    order.variable_discount = 0.15
+    order.fixed_discount = 1000
     print(f"The total price is: ${(order.total_price / 100):.2f}.")
 
 
