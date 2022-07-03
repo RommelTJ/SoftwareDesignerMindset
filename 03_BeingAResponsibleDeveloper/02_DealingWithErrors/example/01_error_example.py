@@ -27,24 +27,26 @@ def blog_list_to_json(item: List[Any]) -> Blog:
 
 
 def fetch_blog(blog_id: str) -> Blog:
-    # Connect to the database
-    con = sqlite3.connect("application.db")
-    cur = con.cursor()
+    try:
+        # Connect to the database
+        con = sqlite3.connect("application.db")
+        cur = con.cursor()
 
-    # Execute the query and fetch the data
-    cur.execute("SELECT * FROM blogs where id=?", [blog_id])
-    result = cur.fetchone()
+        # Execute the query and fetch the data
+        cur.execute("SELECT * FROM blogs where id=?", [blog_id])
+        result = cur.fetchone()
 
-    if result is None:
-        raise NotFoundError(blog_id)
+        if result is None:
+            raise NotFoundError(blog_id)
 
-    # Close the database
-    con.close()
-
-    blog = blog_list_to_json(result)
-    if not blog.public:
-        raise NotAuthorizedError(blog_id)
-    return blog
+        blog = blog_list_to_json(result)
+        if not blog.public:
+            raise NotAuthorizedError(blog_id)
+        return blog
+    finally:
+        # Close the database
+        print("Closing connection")
+        con.close()
 
 
 def main() -> None:
