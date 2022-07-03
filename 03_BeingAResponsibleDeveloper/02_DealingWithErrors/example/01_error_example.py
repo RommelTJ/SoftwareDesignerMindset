@@ -5,6 +5,11 @@ from typing import Any, List
 
 
 @dataclass()
+class NotFoundError(Exception):
+    id: str
+
+
+@dataclass()
 class Blog:
     id: str
     published: datetime
@@ -26,6 +31,9 @@ def fetch_blog(blog_id: str) -> Blog:
     cur.execute("SELECT * FROM blogs where id=?", [blog_id])
     result = cur.fetchone()
 
+    if result is None:
+        raise NotFoundError(blog_id)
+
     # Close the database
     con.close()
 
@@ -33,10 +41,13 @@ def fetch_blog(blog_id: str) -> Blog:
 
 
 def main() -> None:
-    first_blog = fetch_blog("first-blog")
-    private_blog = fetch_blog("private-blog")
-    print(first_blog)
-    print(private_blog)
+    try:
+        first_blog = fetch_blog("firs-blog")  # NotFoundError: firs-blog
+        private_blog = fetch_blog("private-blog")
+        print(first_blog)
+        print(private_blog)
+    except NotFoundError:
+        print("Returning status code 404")
 
 
 if __name__ == "__main__":
