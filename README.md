@@ -1,6 +1,6 @@
 # SoftwareDesignerMindset
 
-Version: 0.2.2 - 03 Jul 2022
+Version: 0.3.0 - 04 Jul 2022
 
 ## Description
 
