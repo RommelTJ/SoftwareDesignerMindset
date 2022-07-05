@@ -1,3 +1,0 @@
-# Notes
-
-TODO: Placeholder
