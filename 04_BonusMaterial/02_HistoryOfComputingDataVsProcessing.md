@@ -16,3 +16,12 @@
   * Declarative programming languages: You describe a solution. Functional and logical languages are here.
   * But now programming languages copy ideas from both schools of thoughts.
 * There's lots of layers of abstractions in the way you program now.
+* In software design we like abstractions. They allow us to separate concerns better.
+* Types are an example of an abstraction.
+* Abstraction in the data layer is much more difficult than abstraction in the processing part.
+* A data structure is just a representation of the data. It's not an abstraction.
+* Most of the effort has been about abstracting the processing, not the data.
+* A lot of work in software design is to be able to swap one thing for another without relying on inheritance.
+  * That's why favor composition over inheritance is the first principle.
+  * This is also why it's important to "Start with the Data".
+* Let go of old-school object-oriented design patterns.
