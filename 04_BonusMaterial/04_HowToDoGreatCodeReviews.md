@@ -14,3 +14,16 @@
 * To get something out of code reviews from senior developers
   * Don't make your commits too large
   * Rely on automatic tooling (linters / formatters / etc.)
+* Things to do as a reviewer
+  * Give feedback on the overall design and how things are setup
+  * Most code reviewing tools focus on line-by-line feedback, which is not the best.
+    * Don't just provide line-by-line feedback
+  * Write constructive feedback. Focus on solution and content.
+  * Try to make a person develop a mindset. Explain why.
+  * Try to look at the code from the user's point of view.
+  * Look at the tests.
+  * Code doesn't have to be 100% perfect, especially with Junior developers.
+  * Code review is a team responsibility.
+  * Getting a junior developer to think about the software design is difficult.
+    * Help them understand the impact of their change.
+    * How easy something is to change.
