@@ -27,3 +27,5 @@
   * Getting a junior developer to think about the software design is difficult.
     * Help them understand the impact of their change.
     * How easy something is to change.
+* If you don't understand code during a review, ask them to explain it. Be transparent about it.
+  * Ignoring it is not useful.
