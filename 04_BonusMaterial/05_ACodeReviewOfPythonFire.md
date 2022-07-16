@@ -13,3 +13,9 @@
 * Don't put TODOs in code. They're very hard to find. They stay in your code forever.
 * Google developers don't always listen to their style guide.
 * Presence of many if-else statements are candidates to refactor to Strategy pattern or dictionary.
+* Instead of initializing each variable, have an initializer in a dataclass. 
+* Don't violate the Law Of Demeter.
+* Styling is inconsistent. Lowercase and camelcase function naming.
+* Avoid returning None if you can return a better value or throw an exception.
+* Put the critical path with less indentation.
+* If you duplicate code, and you have a bug, you have to solve it everywhere.
