@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
-from hotel.db.engine import init_db
+from hotel.db.engine import init_db, DBSession
+from hotel.db.models import DBRoom
 
 app = FastAPI()
 
@@ -15,3 +16,10 @@ def startup_event():
 @app.get("/")
 def read_root():
     return "The server is running."
+
+
+@app.get("/rooms")
+def read_all_rooms():
+    session = DBSession()
+    rooms = session.query(DBRoom).all()
+    return rooms
