@@ -1,36 +1,17 @@
-from dataclasses import dataclass
-from datetime import date
 from fastapi import FastAPI
 
+from hotel.db.engine import init_db
+
 app = FastAPI()
+
+DB_FILE = "sqlite:///hotel.db"
+
+
+@app.on_event("startup")
+def startup_event():
+    init_db(DB_FILE)
 
 
 @app.get("/")
 def read_root():
     return "The server is running."
-
-
-@dataclass()
-class Customer:
-    id: int
-    first_name: str
-    last_name: str
-    email_address: str
-
-
-@dataclass()
-class Room:
-    id: int
-    number: str
-    size: int
-    price: int
-
-
-@dataclass()
-class Booking:
-    id: int
-    from_date: date
-    to_date: date
-    customer: Customer
-    room: Room
-    price: int
