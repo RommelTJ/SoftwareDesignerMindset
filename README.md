@@ -1,6 +1,6 @@
 # SoftwareDesignerMindset
 
-Version: 0.5.0 - 19 Jul 2022
+Version: 0.6.0 - 23 Jul 2022
 
 ## Description
 
