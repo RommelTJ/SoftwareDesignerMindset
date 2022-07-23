@@ -2,7 +2,7 @@ from sqlalchemy.engine.base import Engine
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models import Base
+from hotel.db.models import Base
 
 engine: Engine
 DBSession = sessionmaker()
