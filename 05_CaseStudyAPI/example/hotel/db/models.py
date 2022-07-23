@@ -1,6 +1,8 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column
+from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.sql.sqltypes import Integer, String, Date
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
@@ -26,6 +28,9 @@ class DBBooking(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     from_date = Column(Date, nullable=False)
     to_date = Column(Date, nullable=False)
-    customer: DBCustomer
-    room: DBRoom
     price = Column(Integer, nullable=False)
+
+    customer_id = Column(Integer, ForeignKey("customer.id"))
+    customer = relationship(DBCustomer)
+    room_id = Column(Integer, ForeignKey("room.id"))
+    room = relationship(DBRoom)
