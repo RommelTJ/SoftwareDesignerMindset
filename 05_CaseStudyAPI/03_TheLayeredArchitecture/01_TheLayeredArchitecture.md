@@ -5,4 +5,12 @@
 * Doing scaffolding in the beginning is important
   * You might realize some technical limitations early on, and you need a different library
 
+## What is The Layered Architecture?
 
+* We started with the data. Now we need to think about the functions.
+* Layered architecture
+  * Multiple layers of software. Each layer depending on the one below it.
+  * 3 layers
+    * Database layer
+    * Operations layer
+    * API routing, security, authentication layer
