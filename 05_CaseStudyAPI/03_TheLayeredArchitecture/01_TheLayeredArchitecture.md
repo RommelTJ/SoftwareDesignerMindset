@@ -14,3 +14,9 @@
     * Database layer
     * Operations layer
     * API routing, security, authentication layer
+
+## Creating a layered architecture
+
+* See code example.
+* Set up operations and routers layer.
+* Added a room route.
