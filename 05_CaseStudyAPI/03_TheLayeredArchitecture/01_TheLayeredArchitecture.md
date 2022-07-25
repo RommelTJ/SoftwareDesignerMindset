@@ -20,3 +20,9 @@
 * See code example.
 * Set up operations and routers layer.
 * Added a room route.
+
+## Analysis
+
+* DB Layer only has sqlalchemy imports
+* Operations layer only has models and db imports / dependencies
+* Routing layer only has dependencies to operations dependencies
