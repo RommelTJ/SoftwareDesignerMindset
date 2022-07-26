@@ -5,6 +5,7 @@ from hotel.operations.rooms import read_all_rooms, read_room
 
 router = APIRouter()
 
+
 @router.get("/rooms")
 def api_read_all_rooms():
     return read_all_rooms()
