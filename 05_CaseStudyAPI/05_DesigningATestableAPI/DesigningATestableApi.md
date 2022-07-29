@@ -6,3 +6,4 @@
   * This makes it hard to test.
   * This makes it hard to replace the sqlalchemy library.
   * It's better to inject an object that we can replace / mock. This inverts the dependency.
+* Created interfaces in db (db_interface) and operations (interface).
