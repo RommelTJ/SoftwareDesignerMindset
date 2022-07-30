@@ -21,7 +21,7 @@ class DBInterface:
 
     def create(self, data: DataObject) -> DataObject:
         session = DBSession()
-        result = self.db_class(**data.dict())
+        result = self.db_class(**data)
         session.add(result)
         session.commit()
         return to_dict(result)
