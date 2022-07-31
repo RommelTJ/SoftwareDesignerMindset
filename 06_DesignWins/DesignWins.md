@@ -18,6 +18,11 @@
 
 ## Use Clear Names
 
+* Contract class has an `amount` variable name that is not clear enough.
+* In the example it stands for amount of hours worked, not amount of money.
+* Renamed `amount` to `hours_worked`.
+* By naming your variables clearly, you need less documentation.
+
 ## Avoid Flags
 
 ## Don't Use Too Many Arguments
