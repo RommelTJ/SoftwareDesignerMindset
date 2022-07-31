@@ -71,6 +71,10 @@
 
 ## Keep Classes Small
 
+* A Player class with a lot of instance variables.
+* If you have this scenario, ask if it's really necessary? Can you split the behavior?
+* In the example, we split the instance variables into Character traits and personal traits.
+
 ## Tell Don't Ask
 
 ## Use Meaningful Instance Variables
