@@ -46,6 +46,9 @@
 
 ## Avoid Deeply Nested Conditionals
 
+* Nested conditionals are really hard to understand.
+* Use simple if statements.
+
 ## No Wildcard Imports
 
 ## Write Symmetrical Code
