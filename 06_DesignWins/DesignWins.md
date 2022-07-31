@@ -51,6 +51,11 @@
 
 ## No Wildcard Imports
 
+* Wildcard imports make it really hard to understand where something comes from.
+* Wildcard imports can also easily lead to name clashes.
+* Wildcard imports makes it easy to make mistakes, and introduces a lot of coupling.
+* Regular imports make it clear where stuff comes from. Use regular imports.
+
 ## Write Symmetrical Code
 
 ## Only Use Self If Needed
