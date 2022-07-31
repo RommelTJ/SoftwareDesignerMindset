@@ -67,6 +67,8 @@
 
 ## Only Use Self If Needed
 
+* If a method doesn't need self, turn it into a static method instead.
+
 ## Keep Classes Small
 
 ## Tell Don't Ask
