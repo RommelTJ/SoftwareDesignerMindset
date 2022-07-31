@@ -32,6 +32,12 @@
 
 ## Don't Use Too Many Arguments
 
+* Room reservation example.
+* Class Hotel reserve_room takes too many parameters.
+* Class Reservation is a very complicated class.
+* When you have a method with too many arguments, you should re-evaluate if it needs all that data.
+* You can create a separate customer class to encapsulate all customer information.
+
 ## Use Shallow Nesting
 
 ## Avoid Deeply Nested Conditionals
