@@ -77,6 +77,10 @@
 
 ## Tell Don't Ask
 
+* Normalize function gets a vector and then calculates over its values.
+* Turned the function into an instance method.
+* Now we tell the vector what to do. Don't retrieve all kinds of information and calculate data from that.
+
 ## Use Meaningful Instance Variables
 
 ## Avoid Redundancy
