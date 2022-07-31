@@ -88,6 +88,11 @@
 
 ## Avoid Redundancy
 
+* BankAccount example.
+* _total_balance variable is redundant since it can always be computed.
+* Remove it and compute it by adding checking + savings balance.
+* Careful with using a `@property` annotation with complex calculations.
+
 ## Don't Redefine Programming Concepts
 
 ## Protocol Segregation
