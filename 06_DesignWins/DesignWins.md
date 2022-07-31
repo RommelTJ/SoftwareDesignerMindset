@@ -58,6 +58,13 @@
 
 ## Write Symmetrical Code
 
+* Equipment rental example.
+* PowerDrill and CementMixer calculate rental price differently.
+* This is a bad idea because if we want to rent both, you have to worry about renting them correctly.
+* Increase consistency by bringing things in line with each other.
+* If you have full control over the code, update it.
+* If you don't have full control over the code, use the adapter pattern.
+
 ## Only Use Self If Needed
 
 ## Keep Classes Small
