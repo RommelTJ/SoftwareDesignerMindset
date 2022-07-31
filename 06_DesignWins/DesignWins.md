@@ -103,3 +103,7 @@
 
 ## Function Composition
 
+* Use functools package to compose functions in sequence.
+* You can use compose to combine functions.
+* You can use partial to add in extra variable names.
+* Function composition enables flexible code that is easy to extend.
