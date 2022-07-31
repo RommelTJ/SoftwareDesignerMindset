@@ -99,5 +99,7 @@
 
 ## Protocol Segregation
 
+* Segregate protocols. This allows for more flexibility.
+
 ## Function Composition
 
