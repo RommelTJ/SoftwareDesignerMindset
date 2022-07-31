@@ -40,6 +40,10 @@
 
 ## Use Shallow Nesting
 
+* Payment example with nested if-else statements.
+* Nested if-statements are often a smell for poor cohesion.
+* Split each if-else into its own method.
+
 ## Avoid Deeply Nested Conditionals
 
 ## No Wildcard Imports
