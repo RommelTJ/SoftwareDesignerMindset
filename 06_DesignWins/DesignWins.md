@@ -83,6 +83,9 @@
 
 ## Use Meaningful Instance Variables
 
+* Print method is adding a ton of temporary methods stored in `self`. 
+* They should be stored as a local variable. This is shorter and the garbage collection cleans it up.
+
 ## Avoid Redundancy
 
 ## Don't Redefine Programming Concepts
