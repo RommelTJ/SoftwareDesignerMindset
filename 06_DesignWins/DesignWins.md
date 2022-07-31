@@ -10,6 +10,12 @@
 
 ## Use Built-In Constructs
 
+* Roll dice method is convoluted.
+* We have a for loop that goes through a range and appends to a list.
+* You can do this with a built-in for-comprehension.
+* Similarly, instead of summing stuff up, we can use the built-in sum function.
+* Rely on built-in functions to make your code shorter and easier to maintain.
+
 ## Use Clear Names
 
 ## Avoid Flags
