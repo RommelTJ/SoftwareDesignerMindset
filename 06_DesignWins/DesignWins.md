@@ -95,6 +95,8 @@
 
 ## Don't Redefine Programming Concepts
 
+* Rely on Protocols, Dictionaries, and Enums to accomplish your goals. Don't define these things yourself.
+
 ## Protocol Segregation
 
 ## Function Composition
