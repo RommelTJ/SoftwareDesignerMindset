@@ -25,6 +25,11 @@
 
 ## Avoid Flags
 
+* Bitcoin example, with a place_order that has a flag to determine if we're buying or selling.
+* Flags often indicates poor cohesion. In this case, selling and buying.
+* Create separate methods for each concern. In this case, one for selling and one for buying.
+* If you see a method that uses a flag, it can probably be split into multiple methods.
+
 ## Don't Use Too Many Arguments
 
 ## Use Shallow Nesting
